@@ -1,0 +1,21 @@
+<setup>
+    <block title="Alert Webhook Plus">
+        <text>Configure Alert Webhook Plus</text>
+    </block>
+
+    <block title="API" endpoint="admin/alert_actions" entity="webhook_plus">
+        <text><![CDATA[ Enter User/PW. ]]></text>
+        <input field="param.api.url">
+            <label>User URL</label>
+            <type>text</type>
+        </input>
+        <input field="param.api.user">
+            <label>User Name</label>
+            <type>text</type>
+        </input>
+        <input field="param.api.password">
+            <label>User Password</label>
+            <type>password</type>
+        </input>
+    </block>
+</setup>
