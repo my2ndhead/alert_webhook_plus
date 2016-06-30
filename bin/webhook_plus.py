@@ -43,6 +43,19 @@ if sys.argv[1] == "--execute":
     else:
       print >> sys.stderr, "FATAL No valid scheme found, exit."
       sys.exit(1)
+
+
+    # Getting results dict
+    results = getResults(payload.get('results_file'))
+
+    # Removing unneded elements
+    del payload['result']
+    del payload['configuration']
+ 
+    # Adding results dict to payload
+    payload.update({"results": results})
+
+    results = getResults(payload.get('results_file'))
  
     conn.putrequest("POST", url.path, urllib.urlencode(payload))
     conn.putheader("Authorization", "Basic %s" % auth)
@@ -51,12 +64,6 @@ if sys.argv[1] == "--execute":
     response = conn.getresponse()
     data = response.read()
     conn.close()
-
-    results = getResults(payload.get('results_file'))
-
-    del payload['result']
-    del payload['configuration']
-    payload.update({"results": results})
 
 #    with open("/tmp/webhook_plus_payload.log", "a") as myfile:
 #      myfile.write(json.dumps(payload))
