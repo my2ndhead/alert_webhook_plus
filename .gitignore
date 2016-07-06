@@ -1,0 +1,8 @@
+local/app.conf
+metadata/local.meta
+.DS_Store
+*.log
+MANIFEST
+RELEASE-VERSION
+__pycache__/
+*.py[cod]

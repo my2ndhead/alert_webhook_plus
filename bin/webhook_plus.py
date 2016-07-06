@@ -51,11 +51,13 @@ if sys.argv[1] == "--execute":
     # Removing unneded elements
     del payload['result']
     del payload['configuration']
+
+    # Get results
+    results = getResults(payload.get('results_file'))
  
     # Adding results dict to payload
     payload.update({"results": results})
 
-    results = getResults(payload.get('results_file'))
  
     conn.putrequest("POST", url.path, urllib.urlencode(payload))
     conn.putheader("Authorization", "Basic %s" % auth)
