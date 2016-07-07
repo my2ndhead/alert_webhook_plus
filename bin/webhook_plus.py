@@ -5,9 +5,6 @@ import httplib, urllib
 import base64
 import string
 
-#sys.stdout = open(os.path.join(tempfile.gettempdir(), 'stdout'), 'a')
-#sys.stderr = open(os.path.join(tempfile.gettempdir(), 'stderr'), 'a')
-
 dir = os.path.join(os.path.join(os.environ.get('SPLUNK_HOME')), 'etc', 'apps', 'alert_webhook_plus', 'bin', 'lib')
 if not dir in sys.path:
   sys.path.append(dir)
@@ -42,11 +39,10 @@ if sys.argv[1] == "--execute":
       print >> sys.stderr, "FATAL No valid scheme found, exit."
       sys.exit(1)
 
-
     # Getting results dict
     results = getResults(payload.get('results_file'))
 
-    # Removing unneded elements
+    # Removing unneeded elements
     del payload['result']
     del payload['configuration']
 
@@ -56,10 +52,9 @@ if sys.argv[1] == "--execute":
     # Adding results dict to payload
     payload.update({"results": results})
    
-    #conn.putrequest("POST", url.path, urllib.urlencode(payload))
     conn.putrequest("POST", url.path)
 
-    # If user and password are not set, don't authenticate
+    # If user and password are not set, don't use basic authentication
     if "http.user" in params or "http.password" in params:
       auth = base64.encodestring('%s:%s' % (params["http.user"],  params["http.password"])).replace('\n','')
       conn.putheader("Authorization", "Basic %s" % auth)
