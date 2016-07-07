@@ -1,27 +1,28 @@
-=== Custom Alert Action webhook_plus ===
+=== Custom Alert Action Webhook Plus ===
 
-   Author: my2ndhead
+Author: my2ndhead
 
-   Version/Date: 1.0 / 20160707
+Version/Date: 1.0 / 20160707
 
-   Description: Custom Alert Action, that sends all results via HTTP(S) POST request to recipient. Supports Basic Authentication.
+Description: Custom Alert Action, that sends all results via HTTP(S) POST request to recipient. Supports Basic Authentication.
 
-   Usage: Setup Custom Alert Action through the Setup Page. Enter the HTTP Endpoint URL, User/PW for Basic Authentication
+Usage: Setup Custom Alert Action through the Setup Page. Enter the HTTP Endpoint URL, User/PW for Basic Authentication
 
-   Limitations: - Password is stored in cleartext
-                - Using the alert action without user/password is possible, but not configurable through the UI 
+Limitations: 
+  - Password is stored in cleartext
+  - Using the alert action without user/password is possible, but not configurable through the UI 
 
-   License: - This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. [1]
-            - Commercial Use, Excerpt from CC BY-NC-SA 4.0:
-              "A commercial use is one primarily intended for commercial advantage or monetary compensation."
-            - In case of Custom Alert Action Webhook Plus this translates to:
-              - You may use Custom Alert Action Webhook Plus in commercial environments for handling in-house Splunk alerts
-              - You may use Custom Alert Action Webhook Plus as part of your consulting or integration work, 
-                if you're considered to be working on behalf of your customer. 
-                The customer will be the licensee of Support Add-on for Hypercrypto and must comply according to the license terms
-              - You are not allowed to sell Custom Alert Action Webhook Plus as a standalone product or within an application bundle
-              - If you want to use Custom Alert Action Webhook Plus outside of these license terms, please contact us and we will find a solution
-
+License: 
+  - This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. [1]
+  - Commercial Use, Excerpt from CC BY-NC-SA 4.0:
+    "A commercial use is one primarily intended for commercial advantage or monetary compensation."
+  - In case of Webhook Plus this translates to:
+    - You may use Webhook Plus in commercial environments for handling in-house Splunk alerts
+    - You may use Webhook Plus as part of your consulting or integration work, 
+      if you're considered to be working on behalf of your customer. 
+      The customer will be the licensee of Webhook Plus and must comply according to the license terms
+    - You are not allowed to sell Webhook Plus as a standalone product or within an application bundle
+    - If you want to use Webhook Plus outside of these license terms, please contact us and we will find a solution
 
 === Example Payload:
 
