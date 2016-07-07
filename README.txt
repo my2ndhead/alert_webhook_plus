@@ -24,7 +24,7 @@ License:
     - You are not allowed to sell Webhook Plus as a standalone product or within an application bundle
     - If you want to use Webhook Plus outside of these license terms, please contact us and we will find a solution
 
-=== Example Payload:
+=== Example Payload ===
 
 {
    "owner": "admin",
@@ -56,6 +56,6 @@ License:
 
 
 
-=== References
+=== References ===
 
 [1] http://creativecommons.org/licenses/by-nc-sa/4.0/
