@@ -22,18 +22,16 @@ def getResults(results_file):
 
 if sys.argv[1] == "--execute":
   payload = json.loads(sys.stdin.read())
-  print >> sys.stderr, "INFO Payload: %s" % json.dumps(payload)
+  #print >> sys.stderr, "INFO Payload: %s" % json.dumps(payload)
 
   params = payload.get('configuration')
 
-  if "http.user" not in params or params["http.user"] == "" or "http.password" not in params or params["http.password"] == "" or "http.url" not in params or params["http.url"] == "":
+  if "http.url" not in params or params["http.url"] == "":
     print >> sys.stderr, "FATAL Missing required params, exit."
     sys.exit(1)
 
   else:
-  
-    auth = base64.encodestring('%s:%s' % (params["http.user"],  params["http.password"])).replace('\n','')
-  
+
     url = urlparse(params['http.url']) 
     
     if url.scheme == "http":		
@@ -52,17 +50,27 @@ if sys.argv[1] == "--execute":
     del payload['result']
     del payload['configuration']
 
-    # Get results
+    # Get results from results.csv.gz file
     results = getResults(payload.get('results_file'))
  
     # Adding results dict to payload
     payload.update({"results": results})
+   
+    #conn.putrequest("POST", url.path, urllib.urlencode(payload))
+    conn.putrequest("POST", url.path)
 
- 
-    conn.putrequest("POST", url.path, urllib.urlencode(payload))
-    conn.putheader("Authorization", "Basic %s" % auth)
-    conn.putheader("Content-type", "application/json")
+    # If user and password are not set, don't authenticate
+    if "http.user" in params or "http.password" in params:
+      auth = base64.encodestring('%s:%s' % (params["http.user"],  params["http.password"])).replace('\n','')
+      conn.putheader("Authorization", "Basic %s" % auth)
+
+    conn.putheader("Host", "%s" % url.hostname)
+    conn.putheader("Content-Type", "application/json")
+    conn.putheader("Content-Length", "%s" % len(json.dumps(payload)))
+    conn.putheader("Accept", "*/*")
+    conn.putheader("User-Agent", "Splunk webhook_plus/1.0")
     conn.endheaders()
+    conn.send(json.dumps(payload))
     response = conn.getresponse()
     data = response.read()
     conn.close()
@@ -70,9 +78,7 @@ if sys.argv[1] == "--execute":
 #    with open("/tmp/webhook_plus_payload.log", "a") as myfile:
 #      myfile.write(json.dumps(payload))
 #      myfile.write("\n")
-#      myfile.write(url.path)
-#      myfile.write("\n")
 #      myfile.close()
 
-    print >> sys.stderr, "INFO Status: %s" % response.status
-    print >> sys.stderr, "INFO Reason: %s" % response.reason
+#    print >> sys.stderr, "INFO Status: %s" % response.status
+#    print >> sys.stderr, "INFO Reason: %s" % response.reason

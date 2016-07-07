@@ -1,4 +1,4 @@
-local/app.conf
+local/*
 metadata/local.meta
 .DS_Store
 *.log
